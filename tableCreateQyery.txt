@@ -1,0 +1,34 @@
+CREATE TABLE company 
+(	
+	Id INTEGER PRIMARY KEY IDENTITY(1,1),
+	Company_name VARCHAR(50) NOT NULL,
+
+);
+
+CREATE TABLE departments
+(
+	Id INTEGER PRIMARY KEY IDENTITY(1,1),
+	Department_Name VARCHAR (50) NOT NULL,
+	Department_Phone VARCHAR (50) NOT NULL,
+	CompanyId INT,
+	FOREIGN KEY (CompanyId) REFERENCES company(Id),
+);
+CREATE TABLE employees
+(
+	Id INTEGER PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(20) NOT NULL,
+	Surname VARCHAR (20) NOT NULL,
+	Phone VARCHAR (50) NOT NULL,
+	CompanyId INT NOT NULL,
+	DepartmentId INT NOT NULL,
+	FOREIGN KEY (CompanyId) REFERENCES company(Id),
+	FOREIGN KEY (DepartmentId) REFERENCES departments(Id),
+);
+CREATE TABLE passports
+( 
+	Id INTEGER PRIMARY KEY IDENTITY(1,1),
+	Passport_Type VARCHAR(50) NOT NULL,
+	Passport_Number VARCHAR(50) NOT NULL,
+	EmployeeId INT NOT NULL,
+	FOREIGN KEY (EmployeeId) REFERENCES employees(Id) ON DELETE CASCADE
+);
